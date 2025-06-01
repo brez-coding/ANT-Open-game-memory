@@ -10,7 +10,7 @@ vector<int> codes = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 13, 14,  17, 18, 19, 22,
 vector<vector<int>> colors;
 vector<string> buttons= {"Singleplayer", "Multiplayer", "Custom character palette", "Exit"};
 int chosen=0;
-bool restarted=0;
+bool changed=0, restarted=0;
 
 int n, m;
 ///To select indexation
@@ -188,7 +188,7 @@ void singleplayer()
     Sleep(400);
     loading();
     system("CLS");
-    if(!restarted)
+    if(changed && !restarted)
     {
         cout<<"Palette is: ";
         string counter;
@@ -332,7 +332,7 @@ void multiplayer()
     Sleep(200);
 
     system("CLS");
-    if(!restarted)
+    if(changed && !restarted)
     {
         cout<<"Palette is: ";
         string counter;
@@ -591,6 +591,8 @@ void welcome()
                 symbols=t;
 
                 Sleep(200);
+
+                changed=1;
 
                 refresh();
             }
