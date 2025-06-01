@@ -494,16 +494,27 @@ void default_color()
     cout<<"\033[0m";
 }
 
-void button(string s, bool selected)
+void button(string s, bool selected, int x)
 {
-    if(selected) selected_color();
+
+    int space=(x-s.size())/2;
+    string sp;
+    for(int i=0; i<space; i++) sp+=" ";
 
     string bord=" ";
     for(int i=0; i<s.size(); i++) bord+="-";
     bord+=" ";
+    cout<<sp;
+    if(selected) selected_color();
     cout<<bord<<'\n';
+    default_color();
+    cout<<sp;
+    if(selected) selected_color();
 
     cout<<"|"<<s<<"|\n";
+    default_color();
+    cout<<sp;
+    if(selected) selected_color();
 
     cout<<bord<<'\n';
 
@@ -518,11 +529,12 @@ void refresh()
     ifstream f("name.txt");
 
     string str;
-    while(getline(f, str)) cout<<str<<endl;
+    int x;
+    while(getline(f, str)) {cout<<str<<endl; x=str.size();}
 
     for(int i=0; i<4; i++)
     {
-        button(buttons[i], chosen==i);
+        button(buttons[i], chosen==i, x);
     }
 
     f.close();
